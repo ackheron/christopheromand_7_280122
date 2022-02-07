@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Groupomania P7 backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ackheron/christopheromand_7_280122.git"
+  },
+  "author": "Christophe Romand",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/ackheron/christopheromand_7_280122/issues"
+  },
+  "homepage": "https://gitlab.com/ackheron/christopheromand_7_280122#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "fs": "^0.0.1-security",
+    "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "password-validator": "^5.2.1",
+    "path": "^0.12.7",
+    "sequelize": "^6.15.1",
+    "sequelize-cli": "^6.4.1"
+  }
+}
