@@ -61,10 +61,10 @@ app.use("/api/auth", routesDesUsers);
 app.use("/api/post", routesDesPosts);
 
 //Route générale "./routes/sauceRoute.js" pour la création, la modification et suppression des sauces
-app.use("/api/comment", routesDesComments);
+app.use("/api/post", routesDesComments);
 
 //Route générale "./routes/sauceRoute.js" pour la création, la modification et suppression des sauces
-app.use("/api/vote", routesDesLikes);
+app.use("/api/post", routesDesLikes);
 
 // exportation de app.js pour que les autres fichiers puissent y accéder
 module.exports = app;
