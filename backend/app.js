@@ -64,7 +64,7 @@ app.use("/api/post", routesDesPosts);
 app.use("/api/comment", routesDesComments);
 
 //Route générale "./routes/sauceRoute.js" pour la création, la modification et suppression des sauces
-app.use("/api/like", routesDesLikes);
+app.use("/api/vote", routesDesLikes);
 
 // exportation de app.js pour que les autres fichiers puissent y accéder
 module.exports = app;
