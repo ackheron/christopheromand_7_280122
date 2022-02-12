@@ -13,7 +13,7 @@ const commentControllers = require("../controllers/commentControllers");
 
 router.post("/:id/comment", auth, multer, commentControllers.createComment);
 router.delete("/:id/comment/:id", auth, commentControllers.deleteComment);
-router.put("/:id/comment/:id", auth, commentControllers.updatePost);
+router.put("/:id/comment/:id", auth, commentControllers.updateComment);
 
 /************************************** EXPORTATION  ******************************************/
 module.exports = router;
