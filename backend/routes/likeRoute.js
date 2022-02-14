@@ -7,7 +7,10 @@ const express = require("express");
 const router = express.Router();
 
 // Déclaration et importation du controller likeControllers et sa logique métier
-const likeControllers = require("../controllers/likeControllers");
+const likeControllers = require("../controllers/likeControllers.js");
+
+// Déclaration et importation du middleware auth qui protège les routes sélectionnées et vérifiera que l'utilisateur est authentifié par token avant d'autoriser l'envoi des requêtes.
+const auth = require("../middleware/auth");
 
 /************************************** ROUTERS  ******************************************/
 

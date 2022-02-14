@@ -27,13 +27,13 @@ exports.signup = (req, res) => {
             email: emailCryptoJs,
             username: req.body.username,
             avatar: "",
-            bio: "Veuillez compléter votre profil...",
+            bio: "Profil à compléter...",
             password: hash,
             isAdmin: 0,
           })
             .then((user) => {
               res.status(201).json({
-                message: "Utilisateur créé !",
+                message: "Nouveau profil accepté et crée !",
                 id: user.id,
               });
             })
@@ -41,7 +41,7 @@ exports.signup = (req, res) => {
         });
       } else {
         res.status(409).json({
-          error: "Cet utilisateur existe déjà",
+          error: "Cette adresse mail existe déjà, nouveau profil refusé",
         });
       }
     })
@@ -117,7 +117,7 @@ exports.updateUser = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.deleteUSer = (req, res, next) => {
+exports.deleteUser = (req, res, next) => {
   db.User.findOne({ where: { id: req.params.id } })
     .then((user) => {
       const filename = user.avatar.split("/images/")[1];

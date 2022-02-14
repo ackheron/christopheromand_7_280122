@@ -13,7 +13,7 @@ const password = require("../middleware/password");
 const mail = require("../middleware/email");
 
 // Déclaration et importation du middleware auth qui protège les routes sélectionnées et vérifiera que l'utilisateur est authentifié par token avant d'autoriser l'envoi de ses requêtes.
-const mail = require("../middleware/auth");
+const auth = require("../middleware/auth");
 
 // Déclaration et importation du middleware multer-config qui permet ici l'upload de fichiers images dans le dossier /images
 const multer = require("../middleware/multer-config");
