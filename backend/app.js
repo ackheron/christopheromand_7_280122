@@ -19,7 +19,7 @@ const helmet = require("helmet");
 
 /*********************** Déclarations et importation des routes  ****************************/
 
-const routesDesLikes = require("./routes/likeRoute");
+// const routesDesLikes = require("./routes/likeRoute");
 const routesDesPosts = require("./routes/postRoute");
 const routesDesComments = require("./routes/commentRoute");
 const routesDesUsers = require("./routes/userRoute");
@@ -48,6 +48,21 @@ app.use((req, res, next) => {
 
 /******************************************************************************** */
 
+const db = require("./models");
+
+//Connexion à la base de données
+db.sequelize
+  .authenticate()
+  .then(() => {
+    console.log("La connection à la base de données mariaDB a réussie !");
+  })
+  .catch((error) => {
+    console.log(
+      "Echec la connection à la base de données mariaDB a échouée ! : ",
+      error
+    );
+  });
+
 //transformer le corps de la requête hTTP en objet javascript utilisable accessible par l'intermédiaire de red.body
 app.use(express.json());
 
@@ -64,7 +79,7 @@ app.use("/api/post", routesDesPosts);
 app.use("/api/post", routesDesComments);
 
 //Route générale "./routes/sauceRoute.js" pour la création, la modification et suppression des sauces
-app.use("/api/post", routesDesLikes);
+// app.use("/api/post", routesDesLikes);
 
 // exportation de app.js pour que les autres fichiers puissent y accéder
 module.exports = app;

@@ -89,3 +89,52 @@ exports.deleteComment = (req, res) => {
       res.status(500).json({ error: "Impossible de supprimer le commentaire" })
     );
 };
+
+exports.updateComment = (req, res) => {
+  const id = req.params.id;
+  const data = req.file
+    ? {
+        title: req.body.title,
+        content: req.body.content,
+        userId: req.body.userId,
+        attachment: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
+      }
+    : {
+        title: req.body.title,
+        content: req.body.content,
+        userId: req.body.userId,
+      };
+
+  db.Comment.findByPk(id).then((message) => {
+    const filename = message.attachment
+      ? {
+          name: message.attachment.split("3000/")[1],
+        }
+      : {
+          name: message.attachment,
+        };
+    fs.unlink(`images/${filename.name}`, () => {
+      db.Message.update(data, {
+        where: { id: id },
+      })
+        .then((num) => {
+          if (num == 1) {
+            res.send({
+              message: "Le commentaire a été mis à jour.",
+            });
+          } else {
+            res.send({
+              message: "Erreur lors de la mise à jour du commentaire",
+            });
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: "Impossible de mettre à jour ce commentaire",
+          });
+        });
+    });
+  });
+};
