@@ -16,14 +16,14 @@
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="mx-2"
-          to="/messages"
+          to="/posts"
           icon
           v-bind="attrs"
           v-on="on"
           aria-label="Aller à la page de tous les posts"
         >
           <v-icon>
-            mdi-home
+            mdi-home-circle
           </v-icon>
         </v-btn>
       </template>
@@ -40,7 +40,7 @@
           aria-label="Poster un message"
         >
           <v-icon>
-            mdi-email-plus
+            mdi-note-plus
           </v-icon>
         </v-btn>
       </template>
@@ -57,7 +57,7 @@
           aria-label="Aller à la page de mon profile"
         >
           <v-icon>
-            mdi-account
+            mdi-account-circle
           </v-icon>
         </v-btn>
       </template>
@@ -75,7 +75,7 @@
           aria-label="Se déconnecter"
         >
           <v-icon>
-            mdi-logout
+            mdi-location-exit
           </v-icon>
         </v-btn>
       </template>
