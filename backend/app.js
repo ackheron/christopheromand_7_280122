@@ -72,7 +72,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", routesDesUsers);
 
 //Route générale "./routes/sauceRoute.js" pour la création, la modification et suppression des sauces
-app.use("/api/post", routesDesPosts);
+app.use("/api/posts", routesDesPosts);
 
 //Route générale "./routes/sauceRoute.js" pour la création, la modification et suppression des sauces
 app.use("/api/post", routesDesComments);
