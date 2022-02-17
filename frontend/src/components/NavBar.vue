@@ -1,13 +1,12 @@
 <template>
-  <v-app-bar app color="dark" dark>
+  <v-app-bar app color="deep-orange darken-3" dark>
     <h1>
       <v-toolbar-title
         ><router-link to="/" class="text-decoration-none white--text">
           <v-img
-            src="../assets/icon.png"
-            max-height="40"
-            max-width="40"
-            class="rounded-circle"
+            src="../assets/icon-left-font-monochrome-white.png"
+            max-height="150"
+            max-width="150"
             alt="HOME"
           ></v-img> </router-link
       ></v-toolbar-title>
@@ -86,17 +85,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
   name: "NavBar",
-  computed:{
-    ...mapState(['isLogged'])
+  computed: {
+    ...mapState(["isLogged"]),
   },
 
   methods: {
     logout() {
-      this.$store.dispatch("logout"),
-      this.$router.push("/");
+      this.$store.dispatch("logout"), this.$router.push("/");
     },
     myProfile() {
       if (this.$route.path == `/profile/${this.$store.state.userId}`) {
