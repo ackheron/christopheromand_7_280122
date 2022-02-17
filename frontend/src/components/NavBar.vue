@@ -33,7 +33,7 @@
     <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          to="/messages/new"
+          to="/posts/create"
           icon
           v-bind="attrs"
           v-on="on"

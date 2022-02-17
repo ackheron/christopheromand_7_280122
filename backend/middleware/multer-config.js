@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
   },
   filename: (request, file, callback) => {
     // La fonction filename indique une instruction pour changer le nom du fichier
-    const name = "sauce" + Date.now(); // Modification du nom
+    const name = "image" + Date.now(); // Modification du nom
     const extension = MIME_TYPES[file.mimetype]; // Assignation d'une extension
 
     callback(null, name + "." + extension);
