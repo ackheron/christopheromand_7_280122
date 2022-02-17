@@ -8,12 +8,10 @@ module.exports = (req, res, next) => {
   let testEmail = email.test(req.body.email); // La méthode test() exécute une recherche de correspondance entre  l'expression régulière et l'email contenu dans le corp de la requête. Renvoie vrai ou faux.
 
   if (!testEmail) {
-    return mongooseError(
-      res.status(403).json({
-        message:
-          "Erreur: L'adresse e-mail n'est pas conforme ex: contact@adresse.com !",
-      })
-    );
+    return res.status(403).json({
+      message:
+        "Erreur: L'adresse e-mail n'est pas conforme ex: contact@adresse.com !",
+    });
   } else {
     next();
   }
