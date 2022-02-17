@@ -24,6 +24,7 @@ module.exports = (req, res, next) => {
       // si la demande contient un ID utilisateur, nous le comparons à celui extrait du token.
       throw "User ID non valable"; // Si il est différent "throw" passe le contrôle au prochain bloc catch (error)
     } else {
+      req.userId = userId;
       next(); //Sinon on passe la requête au middleware suivant
     }
   } catch (error) {
