@@ -9,7 +9,7 @@
         <v-card
           class="mx-auto"
           align="center"
-          min-width="80vw"
+          min-width="30vw"
           max-width="80vw"
         >
           <!-- Avatar et photos de l'utilisateur du post-->
@@ -166,7 +166,7 @@
                     </v-icon>
                   </v-btn>
                 </template>
-                <span>J'aime</span>
+                <span>Je n'aime pas</span>
               </v-tooltip>
               <v-tooltip top v-else-if="isDisliked">
                 <template v-slot:activator="{ on, attrs }">
@@ -184,7 +184,7 @@
                 </template>
                 <span>Je n'aime plus</span>
               </v-tooltip>
-              <span>{{ Likes.length }}</span>
+              <span>{{ Dislikes.length }}</span>
             </v-col>
           </v-card-actions>
         </v-card>
@@ -310,7 +310,6 @@
                   type="text"
                   placeholder="Ajouter un commentaire à ce message..."
                   required
-                  :rules="commentRules"
                 ></v-textarea>
                 <div align="center">
                   <v-btn
@@ -341,6 +340,7 @@ import { mapState } from "vuex";
 export default {
   name: "OnePost",
   components: {},
+
   data() {
     return {
       user: {},
@@ -354,19 +354,16 @@ export default {
       },
       comment: "",
       Likes: [],
+      Dislikes: [],
       isLiked: 0,
       isDisliked: 0,
       dialog: false,
       valid: false,
-      commentRules: [
-        (v) =>
-          (v && v.length >= 3) ||
-          "Votre commentaire doit contenir au moins 3 caractères.",
-      ],
     };
   },
   created() {
     this.getLikes();
+    this.getDislikes();
     axios
       .get("http://localhost:3000/api/posts/" + this.$route.params.id, {
         headers: {
@@ -382,9 +379,6 @@ export default {
   },
 
   methods: {
-    toBottom() {
-      this.$vuetify.goTo("#postCom");
-    },
     deleteMessage() {
       this.dialog = false;
       axios
@@ -569,11 +563,11 @@ export default {
           }
         )
         .then((response) => {
-          this.Likes = response.data;
+          this.Dislikes = response.data;
 
           for (let i = 0; i < this.Likes.length; i++) {
-            if (this.Likes[i].UserId == $store.state.userId) {
-              this.isLiked++;
+            if (this.Dislikes[i].UserId == $store.state.userId) {
+              this.isDisliked++;
               break;
             }
           }
@@ -586,7 +580,7 @@ export default {
         });
     },
     addDislike() {
-      if (this.isLiked == 0) {
+      if (this.isDisliked == 0) {
         const data = {
           UserId: $store.state.userId,
           MessageId: this.$route.params.id,
@@ -621,7 +615,7 @@ export default {
       }
     },
     removeDislike() {
-      if (this.isLiked == 1) {
+      if (this.isDisliked == 1) {
         axios
           .delete(
             "http://localhost:3000/api/post/" +

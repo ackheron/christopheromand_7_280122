@@ -6,7 +6,7 @@
           <v-img
             src="../assets/icon-left-font-monochrome-white.png"
             max-height="150"
-            max-width="150"
+            max-width="100"
             alt="HOME"
           ></v-img> </router-link
       ></v-toolbar-title>
@@ -46,7 +46,9 @@
       </template>
       <span>Poster un message</span>
     </v-tooltip>
+
     <v-spacer></v-spacer>
+
     <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">
         <v-btn

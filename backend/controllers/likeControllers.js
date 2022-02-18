@@ -56,7 +56,7 @@ exports.addDislike = (req, res) => {
     MessageId: req.body.MessageId,
     UserId: req.userId,
   };
-  db.Dislike.create(like)
+  db.Dislike.create(dislike)
     .then((data) => {
       res.send(data);
     })

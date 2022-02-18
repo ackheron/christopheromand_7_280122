@@ -13,7 +13,7 @@
           <v-card
             class="my-10 mx-auto"
             align="center"
-            min-width="80vw"
+            min-width="30vw"
             max-width="80vw"
           >
             <v-list-item class="grey" align="left" hover>
