@@ -85,7 +85,7 @@ export default {
 
       if (this.$refs.form.validate()) {
         axios
-          .post("http://localhost:3000/api/post/create", fd, {
+          .post("http://localhost:3000/api/posts/create", fd, {
             headers: {
               Authorization: `Bearer ${$store.state.token}`,
             },
@@ -95,7 +95,7 @@ export default {
               text: "Votre message a été posté",
             });
             this.$router.push({
-              name: "allPosts",
+              name: "AllPosts",
             });
           })
           .catch(() => {

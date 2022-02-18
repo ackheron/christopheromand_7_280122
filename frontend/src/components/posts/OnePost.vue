@@ -112,6 +112,7 @@
               </v-tooltip>
             </v-col>
 
+            <!-- Gestion des likes du post -->
             <v-col>
               <v-tooltip top v-if="!isLiked">
                 <template v-slot:activator="{ on, attrs }">
@@ -120,7 +121,7 @@
                     v-bind="attrs"
                     v-on="on"
                     @click="addLike"
-                    aria-label="Aimer cette publication"
+                    aria-label="Aimer ce message"
                   >
                     <v-icon size="1.5rem" color="green">
                       mdi-thumb-up-outline
@@ -136,10 +137,48 @@
                     v-bind="attrs"
                     v-on="on"
                     @click="removeLike"
-                    aria-label="Ne plus aimer cette publication"
+                    aria-label="Ne plus aimer ce message"
                   >
                     <v-icon size="1.5rem" color="green">
                       mdi-thumb-up
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <span>Je n'aime plus</span>
+              </v-tooltip>
+              <span>{{ Likes.length }}</span>
+            </v-col>
+
+            <!-- Gestion des dislikes du post -->
+
+            <v-col>
+              <v-tooltip top v-if="!isDisliked">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="addDislike"
+                    aria-label="Désapprouvé ce message"
+                  >
+                    <v-icon size="1.5rem" color="red">
+                      mdi-thumb-down-outline
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <span>J'aime</span>
+              </v-tooltip>
+              <v-tooltip top v-else-if="isDisliked">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="removeDislike"
+                    aria-label="Ne plus désapprouver ce message"
+                  >
+                    <v-icon size="1.5rem" color="red">
+                      mdi-thumb-down
                     </v-icon>
                   </v-btn>
                 </template>
@@ -316,6 +355,7 @@ export default {
       comment: "",
       Likes: [],
       isLiked: 0,
+      isDisliked: 0,
       dialog: false,
       valid: false,
       commentRules: [
@@ -424,10 +464,11 @@ export default {
           });
         });
     },
+
     getLikes() {
       axios
         .get(
-          "http://localhost:3000/api/posts/" + +this.$route.params.id + "/like",
+          "http://localhost:3000/api/post/" + +this.$route.params.id + "/like",
           {
             headers: {
               Authorization: `Bearer ${$store.state.token}`,
@@ -459,7 +500,7 @@ export default {
         };
         axios
           .post(
-            "http://localhost:3000/api/posts/" +
+            "http://localhost:3000/api/post/" +
               +this.$route.params.id +
               "/like",
             data,
@@ -490,7 +531,7 @@ export default {
       if (this.isLiked == 1) {
         axios
           .delete(
-            "http://localhost:3000/api/posts/" +
+            "http://localhost:3000/api/post/" +
               +this.$route.params.id +
               "/like",
             {
@@ -514,7 +555,101 @@ export default {
           });
       }
     },
+
+    getDislikes() {
+      axios
+        .get(
+          "http://localhost:3000/api/post/" +
+            +this.$route.params.id +
+            "/dislike",
+          {
+            headers: {
+              Authorization: `Bearer ${$store.state.token}`,
+            },
+          }
+        )
+        .then((response) => {
+          this.Likes = response.data;
+
+          for (let i = 0; i < this.Likes.length; i++) {
+            if (this.Likes[i].UserId == $store.state.userId) {
+              this.isLiked++;
+              break;
+            }
+          }
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Erreur de chargement. Veuillez réessayer.",
+          });
+        });
+    },
+    addDislike() {
+      if (this.isLiked == 0) {
+        const data = {
+          UserId: $store.state.userId,
+          MessageId: this.$route.params.id,
+        };
+        axios
+          .post(
+            "http://localhost:3000/api/post/" +
+              +this.$route.params.id +
+              "/dislike",
+            data,
+            {
+              headers: {
+                Authorization: `Bearer ${$store.state.token}`,
+              },
+            }
+          )
+          .then((response) => {
+            this.like = response.data;
+            this.$store.dispatch("setSnackbar", {
+              text: "Like ajouté !",
+            });
+            this.$router.go();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        this.$store.dispatch("setSnackbar", {
+          color: "error",
+          text: "Veuillez réessayer.",
+        });
+      }
+    },
+    removeDislike() {
+      if (this.isLiked == 1) {
+        axios
+          .delete(
+            "http://localhost:3000/api/post/" +
+              +this.$route.params.id +
+              "/dislike",
+            {
+              headers: {
+                Authorization: `Bearer ${$store.state.token}`,
+              },
+            }
+          )
+          .then((response) => {
+            this.like = response.data;
+            this.$store.dispatch("setSnackbar", {
+              text: "Like supprimé.",
+            });
+            this.$router.go();
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Veuillez réessayer.",
+            });
+          });
+      }
+    },
   },
+
   filters: {
     formatDate: function(value) {
       if (value) {
@@ -527,8 +662,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-a {
-  text-decoration: none;
-}
-</style>
