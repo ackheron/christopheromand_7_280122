@@ -50,11 +50,11 @@
     <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          @click="myProfile"
+          @click="myAccount"
           icon
           v-bind="attrs"
           v-on="on"
-          aria-label="Aller à la page de mon profile"
+          aria-label="Aller à la page de mon compte"
         >
           <v-icon>
             mdi-account-circle
@@ -96,11 +96,11 @@ export default {
     logout() {
       this.$store.dispatch("logout"), this.$router.push("/");
     },
-    myProfile() {
-      if (this.$route.path == `/profile/${this.$store.state.userId}`) {
+    myAccount() {
+      if (this.$route.path == `/account/${this.$store.state.userId}`) {
         window.location.reload();
       } else {
-        this.$router.push(`/profile/${this.$store.state.userId}`);
+        this.$router.push(`/account/${this.$store.state.userId}`);
       }
     },
   },

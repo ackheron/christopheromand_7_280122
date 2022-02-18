@@ -7,6 +7,9 @@ import Home from "../views/Home.vue";
 // Déclaration du composant Signup
 import Signup from "../components/Signup.vue";
 
+// Déclaration du composant Signup
+import Account from "../components/Account.vue";
+
 // Déclaration des composants Posts
 import AllPosts from "../components/posts/AllPosts.vue";
 import NewPost from "../components/posts/NewPost.vue";
@@ -47,6 +50,11 @@ const routes = [
     path: "/posts/update/:id",
     name: "UpdatePost",
     component: UpdatePost,
+  },
+  {
+    path: "/account/:id",
+    name: "Account",
+    component: Account,
   },
 ];
 

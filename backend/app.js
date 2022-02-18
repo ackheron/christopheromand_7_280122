@@ -16,6 +16,8 @@ const path = require("path");
 
 const helmet = require("helmet");
 
+require("dotenv").config();
+
 /*********************** Déclarations et importation des routes  ****************************/
 
 // const routesDesLikes = require("./routes/likeRoute");
@@ -53,7 +55,9 @@ const db = require("./models");
 db.sequelize
   .authenticate()
   .then(() => {
-    console.log("La connection à la base de données mariaDB a réussie !");
+    console.log(
+      `La connection à la base de données ${process.env.DB_DATABASE} sur mariaDB a réussie !`
+    );
   })
   .catch((error) => {
     console.log(
