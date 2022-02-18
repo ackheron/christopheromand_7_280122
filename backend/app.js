@@ -20,10 +20,11 @@ require("dotenv").config();
 
 /*********************** Déclarations et importation des routes  ****************************/
 
-// const routesDesLikes = require("./routes/likeRoute");
+const routesDesLikes = require("./routes/likeRoute");
 const routesDesPosts = require("./routes/postRoute");
 const routesDesComments = require("./routes/commentRoute");
 const routesDesUsers = require("./routes/userRoute");
+// const routesDesLikes = require("./routes/likeRoute");
 
 /*********************** Cross Origin Resource Sharing ****************************/
 
@@ -82,7 +83,7 @@ app.use("/api/posts", routesDesPosts);
 app.use("/api/post", routesDesComments);
 
 //Route générale "./routes/sauceRoute.js" pour la création, la modification et suppression des sauces
-// app.use("/api/post", routesDesLikes);
+app.use("/api/post", routesDesLikes);
 
 // exportation de app.js pour que les autres fichiers puissent y accéder
 module.exports = app;
