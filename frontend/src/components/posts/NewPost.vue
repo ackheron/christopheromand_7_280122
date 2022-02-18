@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="grey darken-4">
     <v-card class="pa-2 mt-7">
       <v-card-title>Écrire un nouveau message</v-card-title>
       <v-form
@@ -57,7 +57,7 @@ import axios from "axios";
 import $store from "@/store/index";
 
 export default {
-  name: "newPost",
+  name: "NewPost",
   components: {},
 
   data() {

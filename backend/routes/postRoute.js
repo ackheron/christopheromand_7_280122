@@ -20,8 +20,8 @@ const postControllers = require("../controllers/postControllers");
 router.post("/create", auth, multer, postControllers.createPost);
 router.get("/", auth, postControllers.getAllPosts);
 router.get("/:id", auth, postControllers.getOnePost);
-router.put("update/:id", auth, multer, postControllers.updatePost);
-router.delete("delete/:id", auth, postControllers.deletePost);
+router.put("/update/:id", auth, multer, postControllers.updatePost);
+router.delete("/delete/:id", auth, postControllers.deletePost);
 
 /************************************** EXPORTATION  ******************************************/
 module.exports = router;

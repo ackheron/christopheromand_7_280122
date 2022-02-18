@@ -7,7 +7,7 @@
           :key="index"
           flat
           hover
-          :to="{ name: 'onePost', params: { id: message.id } }"
+          :to="{ name: 'OnePost', params: { id: message.id } }"
           class="grey darken-4"
         >
           <v-card
@@ -95,7 +95,7 @@ import $store from "@/store/index";
 import dayjs from "dayjs";
 
 export default {
-  name: "allPosts",
+  name: "AllPosts",
   components: {},
   data: () => {
     return {

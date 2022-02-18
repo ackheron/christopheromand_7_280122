@@ -1,6 +1,12 @@
 <template>
   <v-card width="400" class="mx-auto mt-5 rounded-xl" elevation="10">
-    <v-card-title>Connexion</v-card-title>
+    <v-card-title>Crée un compte ou connecté vous</v-card-title>
+    <v-img class="mb-5" contain height="300" src="../assets/icon.svg"></v-img>
+    <v-row align="center" justify="center">
+      <v-btn class="grey accent-2 mb-5" elevation="2" plain small to="/signup">
+        Créer un compte</v-btn
+      >
+    </v-row>
     <v-card-text>
       <v-form v-model="valid" ref="form">
         <v-text-field
@@ -55,7 +61,7 @@ export default {
           this.$store.dispatch("setSnackbar", {
             text: `Content de vous revoir sur Groupomania, ${response.data.username} !`,
           });
-          this.$router.push("/messages");
+          this.$router.push("/posts");
         })
         .catch(() => {
           this.$store.dispatch("setSnackbar", {

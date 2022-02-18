@@ -14,6 +14,7 @@ export default new Vuex.Store({
     isLogged: false,
     snackbar: {},
   },
+
   mutations: {
     setToken(state, token) {
       state.token = token;
@@ -40,6 +41,7 @@ export default new Vuex.Store({
         (state.snackbar = {});
     },
   },
+
   actions: {
     setToken({ commit }, token) {
       commit("setToken", token);

@@ -95,9 +95,7 @@ exports.getUser = (req, res) => {
         res.status(404).json({ error: "Utilisateur non trouvé" });
       }
     })
-    .catch((error) => {
-      res.status(500).json({ error: "Impossible de voir le profil" });
-    });
+    .catch((error) => res.status(500).json({ error }));
 };
 
 exports.updateUser = (req, res, next) => {
