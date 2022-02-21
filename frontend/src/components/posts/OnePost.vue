@@ -120,7 +120,10 @@
                     icon
                     v-bind="attrs"
                     v-on="on"
-                    @click="addLike"
+                    @click="
+                      addLike();
+                      removeDislike();
+                    "
                     aria-label="Aimer ce message"
                   >
                     <v-icon size="1.5rem" color="green">
@@ -158,7 +161,10 @@
                     icon
                     v-bind="attrs"
                     v-on="on"
-                    @click="addDislike"
+                    @click="
+                      addDislike();
+                      removeLike();
+                    "
                     aria-label="Désapprouvé ce message"
                   >
                     <v-icon size="1.5rem" color="red">
@@ -182,7 +188,7 @@
                     </v-icon>
                   </v-btn>
                 </template>
-                <span>Je n'aime plus</span>
+                <span>Je supprime mon dislike</span>
               </v-tooltip>
               <span>{{ Dislikes.length }}</span>
             </v-col>
@@ -565,7 +571,7 @@ export default {
         .then((response) => {
           this.Dislikes = response.data;
 
-          for (let i = 0; i < this.Likes.length; i++) {
+          for (let i = 0; i < this.Dislikes.length; i++) {
             if (this.Dislikes[i].UserId == $store.state.userId) {
               this.isDisliked++;
               break;
@@ -598,9 +604,9 @@ export default {
             }
           )
           .then((response) => {
-            this.like = response.data;
+            this.dislike = response.data;
             this.$store.dispatch("setSnackbar", {
-              text: "Like ajouté !",
+              text: "dislike ajouté !",
             });
             this.$router.go();
           })
@@ -628,9 +634,9 @@ export default {
             }
           )
           .then((response) => {
-            this.like = response.data;
+            this.dislike = response.data;
             this.$store.dispatch("setSnackbar", {
-              text: "Like supprimé.",
+              text: "Dislike supprimé.",
             });
             this.$router.go();
           })
