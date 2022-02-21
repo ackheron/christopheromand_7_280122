@@ -59,27 +59,28 @@
                 <span>{{ message.Comments.length }}</span>
               </v-col>
 
-              <!-- Implantation des icônes like / dislike -->
+              <!-- Implantation de l'icône like -->
               <v-col class="pt-0 pb-0">
                 <v-icon
                   class="mr-1"
                   size="1.5rem"
                   color="green"
-                  aria-label="Aimer ce message"
+                  aria-label="Nombre de likes sur ce message"
                 >
                   mdi-thumb-up
                 </v-icon>
                 <span>{{ message.Likes.length }}</span>
 
+                <!-- Implantation de l'icône dislike -->
                 <v-icon
                   class="mr-1 ml-3"
                   size="1.5rem"
                   color="red"
-                  aria-label="Désapprouver ce message"
+                  aria-label="Nombre de dislikes sur ce message"
                 >
                   mdi-thumb-down
                 </v-icon>
-                <span>{{ message.Likes.length }}</span>
+                <span>{{ message.Dislikes.length }}</span>
               </v-col>
             </v-card-actions>
           </v-card>
@@ -120,6 +121,7 @@ export default {
       })
       .then((response) => {
         this.messageList = response.data;
+        console.log(this.messageList);
       })
 
       .catch((error) => {
