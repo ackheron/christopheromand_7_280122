@@ -1,21 +1,24 @@
 <template>
   <v-app-bar app color="deep-orange darken-3" dark>
     <h1>
-      <v-toolbar-title
-        ><router-link to="/" class="text-decoration-none white--text">
+      <v-toolbar-title>
+        <router-link to="/" class="text-decoration-none white--text">
           <v-img
             src="../assets/icon-left-font-monochrome-white.png"
             max-height="150"
             max-width="100"
             alt="HOME"
-          ></v-img> </router-link
-      ></v-toolbar-title>
+          ></v-img>
+          <v-tooltip><span>test</span></v-tooltip>
+        </router-link>
+      </v-toolbar-title>
     </h1>
+
+    <v-spacer></v-spacer>
 
     <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          class="mx-2"
           to="/posts"
           icon
           v-bind="attrs"
@@ -27,7 +30,7 @@
           </v-icon>
         </v-btn>
       </template>
-      <span>Accueil</span>
+      <span>Afficher Tous les messages</span>
     </v-tooltip>
 
     <v-tooltip v-if="isLogged">
@@ -46,8 +49,6 @@
       </template>
       <span>Poster un message</span>
     </v-tooltip>
-
-    <v-spacer></v-spacer>
 
     <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">
@@ -69,7 +70,6 @@
     <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          class="mx-2"
           @click="logout"
           icon
           v-bind="attrs"

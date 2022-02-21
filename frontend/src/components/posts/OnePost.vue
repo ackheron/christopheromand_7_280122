@@ -1,15 +1,15 @@
 <template>
   <v-container
-    class="d-flex flex-column mx-auto my-10"
+    class="d-flex, flex-column, mx-auto, my-10"
     justify-content="center"
     align="center"
   >
     <v-row>
       <v-col cols="12">
         <v-card
-          class="mx-auto"
+          class="mx-auto  "
           align="center"
-          min-width="30vw"
+          min-width="300"
           max-width="80vw"
         >
           <!-- Avatar et photos de l'utilisateur du post-->
@@ -204,8 +204,9 @@
     <v-row>
       <v-col cols="12">
         <v-card
-          class="mx-auto my-5"
-          min-width="350"
+          class="mx-auto my-5, rounded-xl"
+          elevation="10"
+          min-width="300"
           max-width="60vw"
           v-for="comment in message.Comments"
           :key="comment.id"
@@ -218,7 +219,8 @@
                 <v-img
                   x-small
                   :src="comment.User.avatar"
-                  alt="photo du compte qui commente"
+                  alt="photo de profil du compte qui commente"
+                  aria-label="Aller sur le compte du commentateur"
                 ></v-img>
               </v-list-item-avatar>
             </router-link>
@@ -300,7 +302,7 @@
                  ---------------------------------------------->
 
     <v-col cols="12">
-      <v-card class="mx-auto">
+      <v-card class="mx-auto, rounded-xl" elevation="10">
         <v-container>
           <v-card flat>
             <div>
@@ -312,6 +314,7 @@
                 <v-textarea
                   id="postCom"
                   outlined
+                  class="rounded-xl"
                   v-model="comment"
                   type="text"
                   placeholder="Ajouter un commentaire à ce message..."
@@ -322,10 +325,10 @@
                     type="submit"
                     small
                     value="submit"
-                    color="cyan darken-2"
+                    color="deep-orange darken-3"
                     dark
                     :disabled="!valid"
-                    >Poster</v-btn
+                    ><span class="black--text">Poster</span></v-btn
                   >
                 </div>
               </v-form>
