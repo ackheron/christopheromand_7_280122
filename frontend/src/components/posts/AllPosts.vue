@@ -8,7 +8,8 @@
           flat
           hover
           :to="{ name: 'OnePost', params: { id: message.id } }"
-          class="grey darken-4"
+          class="grey darken-4, rounded-xl"
+          elevation="10"
         >
           <v-card
             class="my-10 mx-auto"
