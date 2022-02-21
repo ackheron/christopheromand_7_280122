@@ -1,6 +1,27 @@
 <template>
-  <v-app class="grey darken-4">
+  <v-app class="blue-grey darken-4">
     <v-container justify-content="center" align="center">
+      <!-- test fab button -->
+      <v-tooltip fixed right bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            fab
+            dark
+            medium
+            color="deep-orange darken-3"
+            fixed
+            right
+            bottom
+            v-bind="attrs"
+            v-on="on"
+            to="/posts/create"
+          >
+            <v-icon dark>mdi-pen-plus</v-icon>
+          </v-btn>
+        </template>
+        <span>Poster un message</span>
+      </v-tooltip>
+
       <v-flex>
         <v-card
           v-for="(message, index) in messageList"
@@ -8,15 +29,12 @@
           flat
           hover
           :to="{ name: 'OnePost', params: { id: message.id } }"
-          class="grey darken-4, rounded-xl"
-          elevation="10"
+          class="blue-grey darken-4 mx-auto rounded-xs"
+          elevation="5"
+          min-width="30vw"
+          max-width="80vw"
         >
-          <v-card
-            class="my-10 mx-auto"
-            align="center"
-            min-width="30vw"
-            max-width="80vw"
-          >
+          <v-card class="my-10 mx-auto blue-grey darken-4" align="center">
             <v-list-item class="grey" align="left" hover>
               <v-list-item-avatar color="grey darken-3">
                 <v-img :src="message.User.avatar"></v-img>
@@ -33,9 +51,10 @@
             </v-list-item>
             <v-row>
               <v-col>
-                <v-card-text class="text-start">{{
-                  message.content
-                }}</v-card-text>
+                <v-card-text
+                  class="text-start white--text font-weight-medium"
+                  >{{ message.content }}</v-card-text
+                >
                 <v-img
                   contain
                   max-height="500"
@@ -46,42 +65,40 @@
 
             <v-card-actions
               align="center"
-              class="grey lighten-4 pt-0 pb-0 mt-15"
+              class="grey darken-4 pt-0 pb-0 mt-15"
             >
               <!-- Implantation de l'icône commentaire -->
               <v-col class="pt-0 pb-0">
                 <v-icon
-                  class="mr-1 black--text"
+                  class="mr-1 white--text"
                   size="1.5rem"
-                  aria-label="Commenter ce message"
+                  aria-label="Nombre de commentaire"
                 >
-                  mdi-message-text</v-icon
+                  mdi-message-reply-outline</v-icon
                 >
-                <span>{{ message.Comments.length }}</span>
+                <span class="white--text">{{ message.Comments.length }}</span>
               </v-col>
 
               <!-- Implantation de l'icône like -->
               <v-col class="pt-0 pb-0">
                 <v-icon
-                  class="mr-1"
+                  class="mr-1 white--text"
                   size="1.5rem"
-                  color="green"
                   aria-label="Nombre de likes sur ce message"
                 >
-                  mdi-thumb-up
+                  mdi-thumb-up-outline
                 </v-icon>
-                <span>{{ message.Likes.length }}</span>
+                <span class="white--text">{{ message.Likes.length }}</span>
 
                 <!-- Implantation de l'icône dislike -->
                 <v-icon
-                  class="mr-1 ml-3"
+                  class="mr-1 ml-3 white--text"
                   size="1.5rem"
-                  color="red"
                   aria-label="Nombre de dislikes sur ce message"
                 >
-                  mdi-thumb-down
+                  mdi-thumb-down-outline
                 </v-icon>
-                <span>{{ message.Dislikes.length }}</span>
+                <span class="white--text">{{ message.Dislikes.length }}</span>
               </v-col>
             </v-card-actions>
           </v-card>

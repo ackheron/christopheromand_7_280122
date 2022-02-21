@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey darken-4">
+  <v-container class="blue-grey darken-4">
     <v-card class="pa-2 mt-7">
       <v-card-title>Écrire un nouveau message</v-card-title>
       <v-form
@@ -36,16 +36,23 @@
           <label v-if="imgPreview" for="preview">Aperçu de l'image:</label>
           <img contain height="100" v-if="imgPreview" :src="imgPreview" />
         </div>
+        <div class="d-flex justify-space-around">
+          <div align="center" class="mt-10">
+            <v-btn
+              align="center"
+              color="black white--text"
+              type="submit"
+              value="submit"
+              dark
+              >Poster</v-btn
+            >
+          </div>
 
-        <div align="center" class="mt-10">
-          <v-btn
-            align="center"
-            color="black white--text"
-            type="submit"
-            value="submit"
-            dark
-            >Poster</v-btn
-          >
+          <div align="center" class="mt-10">
+            <v-btn align="center" color="black white--text" dark to="/posts"
+              >Annuler</v-btn
+            >
+          </div>
         </div>
       </v-form>
     </v-card>

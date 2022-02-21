@@ -33,7 +33,7 @@
       <span>Afficher Tous les messages</span>
     </v-tooltip>
 
-    <v-tooltip v-if="isLogged">
+    <!-- <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           to="/posts/create"
@@ -48,7 +48,7 @@
         </v-btn>
       </template>
       <span>Poster un message</span>
-    </v-tooltip>
+    </v-tooltip> -->
 
     <v-tooltip v-if="isLogged">
       <template v-slot:activator="{ on, attrs }">

@@ -7,14 +7,33 @@
     <v-row>
       <v-col cols="12">
         <v-card
-          class="mx-auto  "
-          align="center"
+          class="mx-auto blue-grey darken-4"
           min-width="300"
           max-width="80vw"
         >
           <!-- Avatar et photos de l'utilisateur du post-->
 
           <v-list-item class="grey" align="left" hover>
+            <v-tooltip relative right bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  fab
+                  dark
+                  medium
+                  color="deep-orange darken-3"
+                  absolute
+                  right
+                  bottom
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="postCom"
+                >
+                  <v-icon dark>mdi-message-reply-outline</v-icon>
+                </v-btn>
+              </template>
+              <span>commenter publication</span>
+            </v-tooltip>
+
             <router-link :to="`/account/${message.User.id}`">
               <v-list-item-avatar outlined color="grey darken-3">
                 <v-img :src="message.User.avatar" alt="photo de profil"></v-img>
@@ -38,14 +57,14 @@
           <v-row>
             <v-col>
               <v-card-title>{{ message.title }}</v-card-title>
-              <v-card-text class="text-start">{{
+              <v-card-text class="text-start white--text font-weight-medium">{{
                 message.content
               }}</v-card-text>
               <v-img contain max-height="600" :src="message.attachment"></v-img>
             </v-col>
           </v-row>
 
-          <v-card-actions align="center">
+          <v-card-actions align="center" class="grey darken-4 pt-0 pb-0 mt-15">
             <v-col>
               <!-- Modifier le post si utilisateur propriétaire -->
 
@@ -53,7 +72,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn class="mr-5" v-bind="attrs" v-on="on" text small>
                     <router-link :to="`/posts/update/${message.id}`">
-                      <v-icon color="black" size="1.5rem">mdi-pen-plus</v-icon>
+                      <v-icon color="white" size="1.5rem">mdi-pen-plus</v-icon>
                     </router-link>
                   </v-btn>
                 </template>
@@ -72,7 +91,7 @@
                     v-bind="attrs"
                     v-on="on"
                     text
-                    color="black"
+                    color="white"
                     small
                   >
                     <v-icon size="1.5rem">mdi-trash-can-outline</v-icon>
@@ -113,85 +132,82 @@
             </v-col>
 
             <!-- Gestion des likes du post -->
-            <v-col>
-              <v-tooltip top v-if="!isLiked">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    v-bind="attrs"
-                    v-on="on"
-                    @click="
-                      addLike();
-                      removeDislike();
-                    "
-                    aria-label="Aimer ce message"
-                  >
-                    <v-icon size="1.5rem" color="green">
-                      mdi-thumb-up-outline
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>J'aime</span>
-              </v-tooltip>
-              <v-tooltip top v-else-if="isLiked">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    v-bind="attrs"
-                    v-on="on"
-                    @click="removeLike"
-                    aria-label="Ne plus aimer ce message"
-                  >
-                    <v-icon size="1.5rem" color="green">
-                      mdi-thumb-up
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>Je n'aime plus</span>
-              </v-tooltip>
-              <span>{{ Likes.length }}</span>
-            </v-col>
+
+            <v-tooltip top v-if="!isLiked">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="
+                    addLike();
+                    removeDislike();
+                  "
+                  aria-label="Aimer ce message"
+                >
+                  <v-icon size="1.5rem" color="green">
+                    mdi-thumb-up-outline
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>J'aime</span>
+            </v-tooltip>
+            <v-tooltip top v-else-if="isLiked">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="removeLike"
+                  aria-label="Ne plus aimer ce message"
+                >
+                  <v-icon size="1.5rem" color="green">
+                    mdi-thumb-up
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>Je n'aime plus</span>
+            </v-tooltip>
+            <span class="white--text">{{ Likes.length }}</span>
 
             <!-- Gestion des dislikes du post -->
 
-            <v-col>
-              <v-tooltip top v-if="!isDisliked">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    v-bind="attrs"
-                    v-on="on"
-                    @click="
-                      addDislike();
-                      removeLike();
-                    "
-                    aria-label="Désapprouvé ce message"
-                  >
-                    <v-icon size="1.5rem" color="red">
-                      mdi-thumb-down-outline
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>Je n'aime pas</span>
-              </v-tooltip>
-              <v-tooltip top v-else-if="isDisliked">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    v-bind="attrs"
-                    v-on="on"
-                    @click="removeDislike"
-                    aria-label="Ne plus désapprouver ce message"
-                  >
-                    <v-icon size="1.5rem" color="red">
-                      mdi-thumb-down
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>Je supprime mon dislike</span>
-              </v-tooltip>
-              <span>{{ Dislikes.length }}</span>
-            </v-col>
+            <v-tooltip top v-if="!isDisliked">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="
+                    addDislike();
+                    removeLike();
+                  "
+                  aria-label="Désapprouvé ce message"
+                >
+                  <v-icon size="1.5rem" color="red">
+                    mdi-thumb-down-outline
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>Je n'aime pas</span>
+            </v-tooltip>
+            <v-tooltip top v-else-if="isDisliked">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="removeDislike"
+                  aria-label="Ne plus désapprouver ce message"
+                >
+                  <v-icon size="1.5rem" color="red">
+                    mdi-thumb-down
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>Je supprime mon dislike</span>
+            </v-tooltip>
+            <span class="white--text">{{ Dislikes.length }}</span>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -320,7 +336,7 @@
                   placeholder="Ajouter un commentaire à ce message..."
                   required
                 ></v-textarea>
-                <div align="center">
+                <div align="center" class="d-flex justify-space-around">
                   <v-btn
                     type="submit"
                     small
@@ -329,6 +345,10 @@
                     dark
                     :disabled="!valid"
                     ><span class="black--text">Poster</span></v-btn
+                  >
+
+                  <v-btn small color="deep-orange darken-3" dark to="/posts"
+                    ><span class="black--text">Annuler</span></v-btn
                   >
                 </div>
               </v-form>
@@ -388,6 +408,10 @@ export default {
   },
 
   methods: {
+    postCom() {
+      this.$vuetify.goTo("#postCom");
+    },
+
     deleteMessage() {
       this.dialog = false;
       axios

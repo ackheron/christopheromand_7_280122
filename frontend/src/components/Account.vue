@@ -88,6 +88,7 @@
     </v-row>
   </v-app>
 </template>
+
 <script>
 import axios from "axios";
 import $store from "@/store/index";
@@ -118,6 +119,7 @@ export default {
         console.log(error);
       });
   },
+
   methods: {
     selectFile() {
       this.file = this.$refs.file.files[0];
