@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         hooks: true,
       });
       models.Message.hasMany(models.Like, { onDelete: "cascade", hooks: true });
+      models.Message.hasMany(models.Dislike, {
+        onDelete: "cascade",
+        hooks: true,
+      });
     }
   }
   Message.init(

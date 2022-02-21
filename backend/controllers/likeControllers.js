@@ -52,7 +52,7 @@ exports.deleteLike = (req, res) => {
 // Ajouter un dislike
 
 exports.addDislike = (req, res) => {
-  const like = {
+  const dislike = {
     MessageId: req.body.MessageId,
     UserId: req.userId,
   };
@@ -81,8 +81,8 @@ exports.deleteDislike = (req, res) => {
   db.Dislike.findOne({
     where: { UserId: req.userId, MessageId: req.params.id },
   })
-    .then((like) => {
-      like
+    .then((dislike) => {
+      dislike
         .destroy()
         .then(() =>
           res.status(200).json({ message: "Le dislike a été annulé !" })

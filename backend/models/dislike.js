@@ -1,61 +1,34 @@
-const Sequelize = require("sequelize");
-module.exports = function (sequelize, DataTypes) {
-  return sequelize.define(
-    "Dislikes",
+"use strict";
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class Dislike extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+
+      models.Dislike.belongsTo(models.Message);
+      models.Dislike.belongsTo(models.User);
+    }
+  }
+  Dislike.init(
     {
-      id: {
-        autoIncrement: true,
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-      },
       UserId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Users",
-          key: "id",
-        },
       },
       MessageId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Messages",
-          key: "id",
-        },
       },
-      like: {
-        type: DataTypes.STRING(45),
-        allowNull: true,
-      },
-      dislike: {
-        type: DataTypes.STRING(45),
-        allowNull: true,
-      },
+      like: DataTypes.INTEGER,
+      dislike: DataTypes.INTEGER,
     },
     {
       sequelize,
-      tableName: "Dislikes",
-      timestamps: true,
-      indexes: [
-        {
-          name: "PRIMARY",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "id" }],
-        },
-        {
-          name: "UserId",
-          using: "BTREE",
-          fields: [{ name: "UserId" }],
-        },
-        {
-          name: "MessageId",
-          using: "BTREE",
-          fields: [{ name: "MessageId" }],
-        },
-      ],
+      modelName: "Dislike",
     }
   );
+  return Dislike;
 };

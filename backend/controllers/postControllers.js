@@ -23,7 +23,11 @@ exports.getAllPosts = (req, res) => {
       },
       {
         model: db.Like,
-        required: false,
+        uired: false,
+      },
+      {
+        model: db.Dislike,
+        uired: false,
       },
     ],
     order: [["createdAt", "DESC"]],
