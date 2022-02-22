@@ -1,15 +1,15 @@
 <template>
-  <v-app class="grey darken-4">
+  <v-app class="blue-grey darken-4">
     <v-row class="my-10">
       <v-col md="4" cols="12">
-        <v-card class="mx-5">
+        <v-card class="mx-5 grey darken-4">
           <v-list-item color="rgba(0, 0, 0, .4)">
             <v-list-item-content>
               <v-img :src="user.avatar"></v-img>
-              <v-list-item-title class="title" align="center">
+              <v-list-item-title class="title white--text" align="center">
                 {{ user.username }}
               </v-list-item-title>
-              <v-list-item>{{ user.bio }}</v-list-item>
+              <v-list-item class="white--text">{{ user.bio }}</v-list-item>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -45,14 +45,15 @@
               <label v-if="imgPreview" for="preview">Aperçu de l'image:</label>
               <img contain height="400" v-if="imgPreview" :src="imgPreview" />
             </div>
-            <v-card-actions>
+            <v-card-actions class="d-flex flex-wrap">
               <v-btn
                 type="submit"
                 color="success"
                 dark
                 aria-label="Sauvegarder"
+                text
               >
-                <v-icon>mdi-content-save</v-icon>
+                Enregistrer
               </v-btn>
               <v-btn
                 @click.stop="dialog = true"
@@ -60,12 +61,15 @@
                 color="red darken-2"
                 dark
                 aria-label="Supprimer le compte"
-                ><v-icon>mdi-delete</v-icon></v-btn
+                text
+                class="ml-0"
+              >
+                Supprimer mon compte</v-btn
               >
               <v-dialog v-model="dialog" max-width="500">
                 <v-card>
                   <v-card-title>
-                    Êtes vous sûr de vouloir supprimer votre profil ?
+                    Supprimer votre profil ?
                   </v-card-title>
 
                   <v-card-actions @click="dialog = false">
@@ -76,7 +80,7 @@
                     </v-btn>
 
                     <v-btn color="green darken-3" text @click="deleteProfile">
-                      Oui, je veux supprimer mon compte.
+                      Oui, je suis sur.
                     </v-btn>
                   </v-card-actions>
                 </v-card>

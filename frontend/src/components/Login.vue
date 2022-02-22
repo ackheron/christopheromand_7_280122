@@ -70,6 +70,19 @@ export default {
           });
         });
     },
+
+    // Fonction pour aller directement sur la page des post si on est connecté
+    islogged: function() {
+      let vuex = JSON.parse(localStorage.getItem("vuex"));
+      console.log(vuex);
+      if (vuex.isLogged === true) {
+        console.log(vuex.isLogged);
+        this.$router.push("/posts");
+      }
+    },
+  },
+  created: function() {
+    this.islogged();
   },
 };
 </script>

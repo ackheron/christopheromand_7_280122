@@ -4,6 +4,10 @@
     justify-content="center"
     align="center"
   >
+    <!-------------------------------------------
+                          PARTIE AFFICHAGE DU POST
+                 ---------------------------------------------->
+
     <v-row>
       <v-col cols="12">
         <v-card
@@ -11,7 +15,7 @@
           min-width="300"
           max-width="80vw"
         >
-          <!-- Avatar et photos de l'utilisateur du post-->
+          <!-- Fab button pour ajouter un nouveau message-->
 
           <v-list-item class="grey" align="left" hover>
             <v-tooltip relative right bottom>
@@ -19,20 +23,23 @@
                 <v-btn
                   fab
                   dark
-                  medium
+                  small
                   color="deep-orange darken-3"
                   absolute
                   right
                   bottom
                   v-bind="attrs"
                   v-on="on"
-                  @click="postCom"
                 >
-                  <v-icon dark>mdi-message-reply-outline</v-icon>
+                  <label for="postCom">
+                    <v-icon dark>mdi-message-reply-outline</v-icon>
+                  </label>
                 </v-btn>
               </template>
               <span>commenter publication</span>
             </v-tooltip>
+
+            <!-- Avatar et photos de l'utilisateur du post-->
 
             <router-link :to="`/account/${message.User.id}`">
               <v-list-item-avatar outlined color="grey darken-3">
@@ -492,6 +499,8 @@ export default {
         });
     },
 
+    // Requêtes des Likes
+
     getLikes() {
       axios
         .get(
@@ -582,6 +591,8 @@ export default {
           });
       }
     },
+
+    // Requêtes des Dislikes
 
     getDislikes() {
       axios

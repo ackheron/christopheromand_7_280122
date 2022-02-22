@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       MessageId: {
         type: DataTypes.INTEGER,
       },
-      like: DataTypes.INTEGER,
-      dislike: DataTypes.INTEGER,
+      // like: DataTypes.INTEGER,
+      // dislike: DataTypes.INTEGER,
     },
     {
       sequelize,

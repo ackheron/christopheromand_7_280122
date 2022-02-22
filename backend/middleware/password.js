@@ -27,7 +27,7 @@ passwordSchema
 module.exports = (req, res, next) => {
   if (!passwordSchema.validate(req.body.password)) {
     return res.status(403).json({
-      message:
+      error:
         "Erreur: Le mot de passe n'est pas assez fort, 8 caractères min 25 max, au moins 2 chiffres, des majuscules et minuscules !",
     });
   } else {

@@ -45,6 +45,7 @@ export default {
     return {
       valid: false,
       showPassword: false,
+      errorMessage: "",
       userInfo: {
         username: "",
         email: "",
@@ -57,20 +58,31 @@ export default {
       if (this.$refs.form.validate()) {
         axios
           .post("http://localhost:3000/api/auth/signup", this.userInfo)
-          .then((response) => {
-            console.log("Register OK! ", response);
+
+          .then((register) => {
+            console.log("Register OK! ", register);
             this.$store.dispatch("setSnackbar", {
               showing: true,
               text: `Votre compte a bien été créé !`,
             });
             this.$router.push("/");
           })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              showing: true,
-              text: `L'adresse email est déjà prise`,
-            });
+          .catch((error) => {
+            console.log(error.message);
+            if (error.message == "Request failed with status code 403") {
+              this.$store.dispatch("setSnackbar", {
+                color: "error",
+                showing: true,
+                text: `Erreur: Le mot de passe n'est pas assez fort, 8 caractères min 25 max, au moins 2 chiffres, des majuscules et minuscules !`,
+              });
+            }
+            if (error.message == "Request failed with status code 400") {
+              this.$store.dispatch("setSnackbar", {
+                color: "error",
+                showing: true,
+                text: `Erreur: L'adresse e-mail n'est pas conforme ex: contact@adresse.com !`,
+              });
+            }
           });
       }
     },
