@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 
 const cors = require("cors");
+
 // importation de morgan "http request logger"
 const morgan = require("morgan");
 
@@ -32,6 +33,8 @@ const routesDesUsers = require("./routes/userRoute");
 
 app.use(cors());
 /******************************************************************************** */
+
+app.use(helmet());
 
 const db = require("./models");
 
