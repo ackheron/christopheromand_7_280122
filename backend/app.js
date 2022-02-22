@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 // importation du module path qui fournit des utilitaires pour travailler avec les chemins de fichiers et de répertoires.
 const path = require("path");
 
-const helmet = require("helmet");
+// const helmet = require("helmet");
 
 require("dotenv").config();
 
@@ -34,7 +34,7 @@ const routesDesUsers = require("./routes/userRoute");
 app.use(cors());
 /******************************************************************************** */
 
-app.use(helmet());
+// app.use(helmet());
 
 const db = require("./models");
 
