@@ -40,7 +40,18 @@ Le projet consiste à construire un réseau social interne pour les employés de
 
 ### back-end :
 
-Se rendre avec la console dans le dossier backend
+Le fichier ".env.example" situé dans le dossier backend donne accès à la base de données et autres variables serveur, pour l'activer il faut supprimer l'extension .example (.env.example => .env)
+
+Il faut ensuite le modifier en ajoutant vos informations de connexion à la base de données :
+
+```bash
+DB_USERNAME = root
+DB_PASSWORD = Votre_mot_de_passe_sql
+DB_DATABASE = Nom_de_votre_choix
+DB_HOST = localhost
+```
+
+Ensuite se rendre avec la console dans le dossier backend
 
 ```
 npm install
@@ -68,23 +79,9 @@ Le server se lance sur http://localhost:8080/
 
 ## Installation Database :
 
-Créer un fichier .env dans le dossier du backend en ajoutant vos informations de connexion à la base de données :
-
-Le fichier .env.example donne accès à la base de données et autres variables, pour l'activer il faut supprimer l'extension .example (.env.example => .env)
-
-Il faut ensuite le modifié ajoutant vos informations de connexion à la base de données :
-
-```bash
-DB_USERNAME = root
-DB_PASSWORD = Votre_mot_de_passe_sql
-DB_DATABASE = Nom_de_votre_choix
-DB_HOST = localhost
-
-```
-
 #### Créer la base de données et faire les migrations :
 
-Un dossier migration vous permettra de créez les tables directement, aller dans backend à la racine :
+Un dossier migration vous permettra de créez les tables directement, aller avec la console à la racine du dossier backend :
 
 ```bash
   npx sequelize-cli db:create
