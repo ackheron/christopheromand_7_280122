@@ -75,12 +75,17 @@ export default {
                 showing: true,
                 text: `Erreur: Le mot de passe n'est pas assez fort, 8 caractères min 25 max, au moins 2 chiffres, des majuscules et minuscules !`,
               });
-            }
-            if (error.message == "Request failed with status code 400") {
+            } else if (error.message == "Request failed with status code 400") {
               this.$store.dispatch("setSnackbar", {
                 color: "error",
                 showing: true,
                 text: `Erreur: L'adresse e-mail n'est pas conforme ex: contact@adresse.com !`,
+              });
+            } else {
+              this.$store.dispatch("setSnackbar", {
+                color: "error",
+                showing: true,
+                text: `Erreur: L'adresse e-mail est déja utilisé !`,
               });
             }
           });
